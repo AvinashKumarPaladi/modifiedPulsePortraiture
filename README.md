@@ -1,16 +1,6 @@
 # modifiedPulsePortraiture
-We need two more packages than Tim Penucci's PulsePortraiture
 
-1. pip install nautilus-sampler (https://nautilus-sampler.readthedocs.io/en/latest/guides/installation.html)
-2. pip install pygeostat (https://www.ccgalberta.com/pygeostat/installation.html)
-
-We need nautilus for bayesian mode of estimating toas and DM.
-We need pygeostat for estimating skewness and kurtosis for phi and DM posteriors (will be helpful in outlier analysis).
-
-
-# modifiedPulsePortraiture
-
-A modified and extended version of Timothy T. Pennucci's [PulsePortraiture](https://github.com/pennucci/PulsePortraiture) package, adapted for wideband and multiband pulsar timing within the **Indian Pulsar Timing Array (InPTA)** pipeline. This package introduces Bayesian TOA/DM estimation via the **Maximum Likelihood with Analytic Noise (MLAN)** technique and adds support for simultaneous Band 3 + Band 5 (B35) observations at the uGMRT.
+A modified and extended version of Timothy T. Pennucci's [PulsePortraiture](https://github.com/pennucci/PulsePortraiture) package, adapted for singleband and dualband pulsar timing within the **Indian Pulsar Timing Array (InPTA)**. This package introduces **Bayesian TOA/DM estimation**, **Marginalized Likelihood over Amplitude & Noise (MLAN)** technique in addition to the Timothy T. Pennucci's [PulsePortraiture](https://github.com/pennucci/PulsePortraiture) package.
 
 ---
 
@@ -20,16 +10,13 @@ A modified and extended version of Timothy T. Pennucci's [PulsePortraiture](http
 
 - **Phase shifts / Times of Arrival (TOAs)**
 - **Dispersion Measures (DMs)**
-- **ν⁻⁴ delay parameters (GMs)**
-- **Scattering timescales (τ) and scattering indices (α)**
-- **Mean flux densities**
 
 It extends the original PulsePortraiture with two fitting techniques:
 
 | Technique | Description |
 |-----------|-------------|
-| **MLA** (Maximum Likelihood Analysis) | Pennucci et al. method — maximized over amplitude |
-| **MLAN** (MLA + Nautilus sampler) | Abhimanyu et al. method — marginalized over amplitude and noise via Bayesian nested sampling |
+| **MLA** (Maximum Likelihood over Amplitude) | Pennucci et al. method — maximized over amplitude |
+| **MLAN** (Marginalized over Amplitude & Noise) | Abhimanyu et al. method — marginalized over amplitude and noise |
 
 Each technique supports two estimation modes:
 
@@ -38,7 +25,7 @@ Each technique supports two estimation modes:
 | **freq** | *(default)* | Frequentist optimization |
 | **bayes** | `--bayes` | Bayesian posterior estimation |
 
-The `_b35` variants of scripts are designed for simultaneous **Band 3 + Band 5** multiband fitting at the uGMRT.
+The `_b35` variants of scripts are designed for simultaneous **Band 3 + Band 5** multiband fitting for uGMRT pulsar data.
 
 ---
 
@@ -66,7 +53,7 @@ modifiedPulsePortraiture/
 
 ### From the original PulsePortraiture
 
-Install [PulsePortraiture](https://github.com/pennucci/PulsePortraiture) and its dependencies first (PSRCHIVE, numpy, scipy, etc.).
+Install [PulsePortraiture](https://github.com/pennucci/PulsePortraiture) dependencies first (PSRCHIVE, numpy, scipy, etc.). You can use this [Installation Guide](https://docs.google.com/document/d/1PH0PnOZakDJskxhjGGklTX7JTxr6HqER6BSBNn7b6AA/edit?usp=sharing)
 
 ### Additional packages required by modifiedPulsePortraiture
 
@@ -75,8 +62,8 @@ pip install nautilus-sampler
 pip install pygeostat
 ```
 
-- **[nautilus-sampler](https://nautilus-sampler.readthedocs.io/en/latest/guides/installation.html)** — Required for Bayesian (MLAN) mode via nested sampling.
-- **[pygeostat](https://www.ccgalberta.com/pygeostat/installation.html)** — Required for estimating skewness and kurtosis of φ and DM posteriors (used in outlier analysis).
+- **[nautilus-sampler](https://nautilus-sampler.readthedocs.io/en/latest/guides/installation.html)** — Required for Bayesian (--bayes) mode via nested sampling.
+- **[pygeostat](https://www.ccgalberta.com/pygeostat/installation.html)** — Required for estimating skewness and kurtosis of φ and DM posteriors (helpful in outlier analysis).
 
 ---
 
@@ -275,7 +262,6 @@ The scripts produce **IPTA-formatted TOA files** (`.tim`) with extended InPTA-sp
 
 Results are validated on pulsar **J2124-3358** from InPTA DR2 across all four technique combinations, comparing frequentist vs. Bayesian modes and B3 vs. B35 coverage.
 
-**Note on plots:** PHI (phase) is plotted rather than raw TOA values, since the TOA range spans several years while the variations of interest are at the sub-microsecond level. Colour coding reflects SNR — yellow = high SNR, blue = low SNR.
 
 **Key takeaways:**
 
