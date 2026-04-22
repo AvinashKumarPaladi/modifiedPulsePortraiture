@@ -2419,6 +2419,8 @@ if __name__ == "__main__":
     pool = options.pool
     quiet = options.quiet
     outdir = options.outdir
+    try: os.system(f'mkdir -p {outdir}')
+    except OSError: pass
     
     if not mlan:
         from mpptoaslib_b35 import *
