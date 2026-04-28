@@ -1110,9 +1110,9 @@ class GetTOAs(object):
                 if fit_flags[4]:
                     toa_flags['scat_ind_err'] = results.alpha_err
 
-                toa_flags['be'] = d3.backend + "_&_" + d5.backend
-                toa_flags['fe'] = d3.frontend + "_&_" + d5.frontend
-                toa_flags['f'] = d3.frontend + "_" + d3.backend + "_" + str(int(d3.bw)) + "_&_" + d5.frontend + "_" + d5.backend + "_" + str(int(d5.bw))
+                toa_flags['be'] = d3.backend + "_and_" + d5.backend
+                toa_flags['fe'] = d3.frontend + "_and_" + d5.frontend
+                toa_flags['f'] = d3.frontend + "_" + d3.backend + "_" + str(int(d3.bw)) + "_and_" + d5.frontend + "_" + d5.backend + "_" + str(int(d5.bw))
                 #################################################################
                 toa_flags['pta'] = "InPTA"
                 if (epoch_band3.intday()-epoch_band5.intday() > 1):
@@ -1124,11 +1124,11 @@ class GetTOAs(object):
                 ar_freq5 = np.mean(d5.freqs)
                 ar_bec5 = d5.beconfig
                 if (ar_mjd < 58600.):
-                    toa_flags['group'] = 'GM_GWB_'+ar_bec3[1]+'_'+ar_bec3[2]+'_'+ar_bec3[0]+'_pre36'+'_&_'+'GM_GWB_'+ar_bec5[1]+'_'+ar_bec5[2]+'_'+ar_bec5[0]+'_pre36'
-                    toa_flags['sys'] = 'GM_GWB_'+ar_bec3[1]+'_'+ar_bec3[2]+'_'+ar_bec3[0]+'_&_'+'GM_GWB_'+ar_bec5[1]+'_'+ar_bec5[2]+'_'+ar_bec5[0]
+                    toa_flags['group'] = 'GM_GWB_'+ar_bec3[1]+'_'+ar_bec3[2]+'_'+ar_bec3[0]+'_pre36'+'_and_'+'GM_GWB_'+ar_bec5[1]+'_'+ar_bec5[2]+'_'+ar_bec5[0]+'_pre36'
+                    toa_flags['sys'] = 'GM_GWB_'+ar_bec3[1]+'_'+ar_bec3[2]+'_'+ar_bec3[0]+'_and_'+'GM_GWB_'+ar_bec5[1]+'_'+ar_bec5[2]+'_'+ar_bec5[0]
                 if (ar_mjd > 58600.):
-                    toa_flags['group'] = 'GM_GWB_'+ar_bec3[1]+'_'+ar_bec3[2]+'_'+ar_bec3[0]+'_post36'+'_&_'+'GM_GWB_'+ar_bec5[1]+'_'+ar_bec5[2]+'_'+ar_bec5[0]+'_post36'
-                    toa_flags['sys'] = 'GM_GWB_'+ar_bec3[1]+'_'+ar_bec3[2]+'_'+ar_bec3[0]+'_&_'+'GM_GWB_'+ar_bec5[1]+'_'+ar_bec5[2]+'_'+ar_bec5[0]
+                    toa_flags['group'] = 'GM_GWB_'+ar_bec3[1]+'_'+ar_bec3[2]+'_'+ar_bec3[0]+'_post36'+'_and_'+'GM_GWB_'+ar_bec5[1]+'_'+ar_bec5[2]+'_'+ar_bec5[0]+'_post36'
+                    toa_flags['sys'] = 'GM_GWB_'+ar_bec3[1]+'_'+ar_bec3[2]+'_'+ar_bec3[0]+'_and_'+'GM_GWB_'+ar_bec5[1]+'_'+ar_bec5[2]+'_'+ar_bec5[0]
                 
                 if (300. < ar_freq3 < 500.):
                     bnda = '3'
@@ -1142,7 +1142,7 @@ class GetTOAs(object):
                     bndb = '4'
                 if (1260. < ar_freq5 < 1460.):
                     bndb = '5'
-                toa_flags['bandno'] = bnda + '_&_' + bndb
+                toa_flags['bandno'] = bnda + '_and_' + bndb
 
                 if (ar_mjd > 58230.):
                     toa_flags['cycle'] = 'post34'
@@ -2249,11 +2249,11 @@ if __name__ == "__main__":
     parser.add_option("-c", "--modelfile_band3",
                       action="store", metavar="model", dest="modelfile_band3",
                       default="port_files/J1909.b3.spl",
-                      help="Model file from ppgauss.py, ppspline.py, or PSRCHIVE FITS file that either has same channel frequencies, nchan, & nbin as datafile(s), or is a single profile (nchan = 1, with the same nbin) to be interpreted as a constant template.")
+                      help="Model file from ppgauss.py, ppspline.py, or PSRCHIVE FITS file that either has same channel frequencies, nchan, and nbin as datafile(s), or is a single profile (nchan = 1, with the same nbin) to be interpreted as a constant template.")
     parser.add_option("-d", "--modelfile_band5",
                       action="store", metavar="model", dest="modelfile_band5",
                       default="port_files/J1909.b5.spl",
-                      help="Model file from ppgauss.py, ppspline.py, or PSRCHIVE FITS file that either has same channel frequencies, nchan, & nbin as datafile(s), or is a single profile (nchan = 1, with the same nbin) to be interpreted as a constant template.")
+                      help="Model file from ppgauss.py, ppspline.py, or PSRCHIVE FITS file that either has same channel frequencies, nchan, and nbin as datafile(s), or is a single profile (nchan = 1, with the same nbin) to be interpreted as a constant template.")
     parser.add_option("-o", "--outfile",
                       action="store", metavar="timfile", dest="outfile",
                       default="J1909.pp35_2.tim",
