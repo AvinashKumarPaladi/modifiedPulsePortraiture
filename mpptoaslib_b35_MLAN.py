@@ -1886,7 +1886,7 @@ def fit_portrait_full_mlan(data_port_band3, data_port_band5, model_port_band3, m
                                     tau=tau_out, tau_err=param_errs[3], alpha=alpha_fit,
                                     alpha_err=param_errs[4], scales=scales, scale_errs=scales,
                                     nu_DM=nu_out_DM, nu_GM=nu_out_GM, nu_tau=nu_out_tau,
-                                    covariance_matrix=covariance_matrix, chi2=chi2, red_chi2=red_chi2, gt=gt,
+                                    covariance_matrix=covariance_matrix, chi2=chi2, red_chi2=red_chi2,
                                     snr=snr, channel_snrs=channel_snrs, duration=duration,
                                     phi_inf=phi_inf, phi_inf_err=phi_inf_err,
                                     nfeval=nfeval, return_code=return_code)
