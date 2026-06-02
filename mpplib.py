@@ -2774,26 +2774,26 @@ def load_data(filename, state=None, dedisperse=False, dededisperse=False,
     result = subprocess.run(command, shell=True, stdout= subprocess.PIPE, text=True)
     if result.returncode == 0:
         output_lines = result.stdout.strip().split('\n')
-        last_value = output_lines[-1].split('|')[-1].strip()
-        first_value_line = output_lines[0]
-        hfvalue = int(first_value_line.split('=')[1].split('|')[0])
-        bwvalue = int(first_value_line.split('=')[1].split('|')[1])
-        # print('second value:', int(first_value_line.split('=')[1].split('|')[1]))
-        # print('last', last_value)
-        # print('first_value_line', first_value_line)
-        # print('value', value)
-        # print(ok)
-        #print(last_value)
-        if last_value == '0':
-            a = 'b0'
-        elif last_value == '1':
-            a = 'b1'
-        else:
-            print("unexpected value:", last_value)
+        try:
+            last_value = output_lines[-1].split('|')[-1].strip()
+            first_value_line = output_lines[0]
+            hfvalue = int(first_value_line.split('=')[1].split('|')[0])
+            bwvalue = int(first_value_line.split('=')[1].split('|')[1])
+            if last_value == '0':
+                a = 'b0'
+            elif last_value == '1':
+                a = 'b1'
+            else:
+                print("unexpected value:", last_value)
+        except Exception:
+            print(f'Cannot load be:config information. Proceeding without it.')
+            hfvalue = None
+            bwvalue = None
     else:
         print("Error running psredit command:")
         print(result.stderr)
-    beconfig = [a,str(hfvalue),str(bwvalue)]
+        
+    beconfig = [a, str(hfvalue), str(bwvalue)]
 
     ######################################################################################
     source = arch.get_source()
