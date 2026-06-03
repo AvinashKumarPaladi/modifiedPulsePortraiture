@@ -2785,10 +2785,11 @@ def load_data(filename, state=None, dedisperse=False, dededisperse=False,
                 a = 'b1'
             else:
                 print("unexpected value:", last_value)
+                a = 'b'
         except Exception:
             print(f'Cannot load be:config information. Proceeding without it.')
-            hfvalue = None
-            bwvalue = None
+            hfvalue = 0
+            bwvalue = 0
     else:
         print("Error running psredit command:")
         print(result.stderr)
